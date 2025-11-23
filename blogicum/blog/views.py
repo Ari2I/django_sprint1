@@ -47,8 +47,7 @@ posts = [
 
 def index(request):
     context = {'posts': posts}
-    return render(request, 'index.html',context)
-
+    return render(request, 'index.html', context)
 
 
 def post_detail(request, id):
@@ -63,7 +62,6 @@ def post_detail(request, id):
 
     context = {'post': post}
     return render(request, 'detail.html', context)
-
 
 
 def category_posts(request):
