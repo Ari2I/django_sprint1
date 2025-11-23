@@ -46,23 +46,26 @@ posts = [
 
 
 def index(request):
-    context = {'posts': posts}
-    return render(request, 'index.html', context)
+    # Инвертируем порядок постов (новые первыми)
+    reversed_posts = list(reversed(posts))
+    context = {'posts': reversed_posts}
+    return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, id):
-    # Ищем пост по ID в нашем списке
     post = None
     for p in posts:
         if p['id'] == id:
             post = p
             break
+
     if post is None:
         raise Http404("Пост не найден")
 
     context = {'post': post}
-    return render(request, 'detail.html', context)
+    return render(request, 'blog/detail.html', context)
 
 
-def category_posts(request):
-    return render(request, 'category.html')
+def category_posts(request, category_slug):
+    context = {'category_slug': category_slug}
+    return render(request, 'blog/category.html', context)
